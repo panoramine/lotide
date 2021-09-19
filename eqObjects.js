@@ -15,38 +15,26 @@ const eqArrays = function(arrayA, arrayB) {
 
 const eqObjects = function(obj1, obj2) {
   let areEqual;
-  let counter1 = 0;
-  let counter2 = 0;
   for (let key1 in obj1) {
-    counter1 += 1;
-    areEqual = false;
     if (typeof obj1[key1] === 'object') {
-      for (let key2 in obj2) {
-        counter2 += 1;
-        if (typeof obj2[key2] === 'object') {
-          areEqual = eqArrays(obj1[key1], obj2[key2]);
+      if (typeof obj2[key1] === 'object') {
+        if (Array.isArray(obj1[key1] && Array.isArray(obj2[key1]))) {
+          areEqual = eqArrays(obj1[key1], obj2[key1]);
+        } else {
+          return eqObjects(obj1[key1], obj2[key1]);
         }
-      }
-      if (!areEqual) {
-        break;
+      } else {
+        areEqual = false;
       }
     } else {
-      for (let key2 in obj2) {
-        counter2 += 1;
-        if (obj1[key1] === obj2[key2]) {
-          areEqual = true;
-          
-        }
-      }
-      if (!areEqual) {
-        break;
+      if (obj2[key1] !== obj1[key1]) {
+        areEqual = false;
       }
     }
   }
-  if ((counter2 / counter1) !== counter1) {
-    areEqual = false;
+  if (areEqual === false) {
+    return false;
+  } else {
+    return true;
   }
-  return areEqual;
 };
-
-
