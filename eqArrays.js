@@ -12,11 +12,20 @@ const eqArrays = function(arrayA, arrayB) {
     areEquals = false;
   } else {
     for (let i = 0; i < arrayB.length; i++) {
-      if (arrayB[i] !== arrayA[i]) {
-        areEquals = false;
+      if (Array.isArray(arrayA[i]) && Array.isArray(arrayB[i])) {
+        if (eqArrays(arrayB[i], arrayA[i]) === false) {
+          return areEquals = false
+          }
+      } 
+      else if (!Array.isArray(arrayA[i]) && !Array.isArray(arrayB[i])) {
+        if (arrayB[i] !== arrayA[i]) {
+          return areEquals = false;
+        }
+      }
+      else {
+        return areEquals = false;
       }
     }
   }
   return areEquals;
 };
-
