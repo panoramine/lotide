@@ -9,3 +9,4 @@ const findKey = function (obj, callback) {
   return answer;
 };
 
+module.exports = findKey;

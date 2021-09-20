@@ -10,3 +10,4 @@ const letterPositions = function(sentence) {
   return results;
 };
 
+module.exports = letterPositions;
